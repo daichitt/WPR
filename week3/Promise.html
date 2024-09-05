@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises</title>
+</head>
+<body>
+    <p id="demo"></p>
+    <button id="text">test</button>
+
+    <script>
+        let myPromise = new Promise(function(resolve, reject) {
+            setTimeout(function() { resolve("I love You !!"); }, 3000);
+            setTimeout(function() { reject("Something went wrong"); }, 5000);
+        });
+
+        myPromise.then(function(value) {
+            document.getElementById("demo").innerHTML = value;
+            console.error(value);
+        })
+        .then(function(value) {
+            console.log('This is the second then block');
+        })
+        .catch((err) => {
+            document.getElementById("demo").innerHTML = err;
+            console.error(err);
+        });
+
+        console.log(myPromise);
+
+        // function executor(resolve) {
+        // resolve('Woohoo!');
+        // }
+        // let myPromise = new Promise(executor);
+        // let thenPromise = myPromise.then(console.log);
+        // let catchPromise = thenPromise.catch(console.error);
+        // console.log(thenPromise instanceof Promise); // true
+        // console.log(catchPromise instanceof Promise); // true
+        // console.log(myPromise === thenPromise); // false
+        // console.log(myPromise === catchPromise); // false
+        // console.log(thenPromise === catchPromise); // false
+
+        // console.log("-------------------"); // false
+
+
+
+        // // console.log(thenPromise instanceof Promise); // true
+        // // console.log(catchPromise instanceof Promise); // true
+        // console.log(myPromise); // fullfied
+        // console.log(thenPromise); // pending
+        // console.log(catchPromise); // pending
+        
+
+
+    </script>
+    
+</body>
+</html>
