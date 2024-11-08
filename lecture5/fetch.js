@@ -8,7 +8,14 @@ async function fetchData() {
     const res = await fetch(url);
     let text = await res.json();
     // console.log(text);
-    console.log(JSON.stringify(text, null, 2));
+    console.log(JSON.stringify(text, null, 15));
+
+    // console.log(JSON.parse(text));
+
+
+    // JSON.parse(data)
+    console.log("test 1")
+
 }
 fetchData();
 

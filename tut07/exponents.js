@@ -1,7 +1,6 @@
-//  "type": "module", in package.json allowed to use import instead of require
-import express from 'express';
-import fs from 'fs/promises';
-import multer from 'multer';
+const express = require('express');
+const fs = require('fs').promises;
+const multer = require('multer');
 
 const app = express()
 app.use(express.json());

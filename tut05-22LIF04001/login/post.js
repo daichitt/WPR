@@ -12,6 +12,9 @@
    */
   function init() {
     // TODO
+    let API_URL = "https://hanustartup.org/wpr/api/login.php";
+
+
   }
 
   /**
@@ -20,6 +23,22 @@
    */
   function signIn() {
     //TODO
+    let username = id("username").value;
+    let password = id("password").value;
+    let dataBody = new FormData();
+    dataBody.append("username", username);
+    dataBody.append("password", password);
+
+    fetch(API_URL, {method: "POST", body: dataBody})
+    .then(statusCheck)
+        .then((data) => {
+          let responseDiv = id("response");
+          responseDiv.textContent = data;
+        }).catch(error => {
+
+    })
+
+
   }
 
   /* ------------------------------ Helper Functions  ------------------------------ */

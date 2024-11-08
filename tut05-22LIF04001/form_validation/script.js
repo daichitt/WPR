@@ -12,9 +12,21 @@
    */
   function init() {
     // Add event listener to form submit button
+    let form = id("myForm");
+    form.addEventListener("submit", validateForm);
 
     // Add event listeners to input fields for real-time validation
-    
+    let nameInput = id("name");
+    nameInput.addEventListener("input", validateName);
+
+    let emailInput = id("email");
+    emailInput.addEventListener("input", validateEmail);
+
+    let passwordInput = id("password");
+    passwordInput.addEventListener("input", validatePassword);
+
+    let confirmPasswordInput = id("confirmPassword");
+    confirmPasswordInput.addEventListener("input", validateConfirmPassword);
   }
 
   /**
@@ -22,18 +34,30 @@
    * @param {Event} event - the event that triggered this function
    */
   function validateForm(event) {
-    // Prevent form from submitting if there are validation errors
+    event.preventDefault(); // Prevent form from submitting if there are validation errors
 
-    let isValid = validateName() & validateEmail() & validatePassword() & validateConfirmPassword();
-    // After successful validation, display a 3-second countdown and then show a success message.
-
+    let isValid = validateName() && validateEmail() && validatePassword() && validateConfirmPassword();
+    if (isValid) {
+      startCountdown();
+    }
   }
 
   /**
    * Starts a 3-second countdown and displays a success message
    */
   function startCountdown() {
-    
+    let countdown = 3;
+    let countdownElement = id("countdown");
+
+    let countdownInterval = setInterval(function() {
+      countdownElement.textContent = countdown;
+      countdown--;
+
+      if (countdown < 0) {
+        clearInterval(countdownInterval);
+        countdownElement.textContent = "Success!";
+      }
+    }, 1000);
   }
 
   /**
@@ -41,9 +65,16 @@
    * @returns {boolean} - true if valid, false otherwise
    */
   function validateName() {
+    let nameInput = id("name");
+    let nameError = id("nameError");
 
-
-
+    if (nameInput.value.trim() === "") {
+      nameError.textContent = "Name is required";
+      return false;
+    } else {
+      nameError.textContent = "";
+      return true;
+    }
   }
 
   /**
@@ -51,7 +82,17 @@
    * @returns {boolean} - true if valid, false otherwise
    */
   function validateEmail() {
+    let emailInput = id("email");
+    let emailError = id("emailError");
 
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailInput.value)) {
+      emailError.textContent = "Invalid email format";
+      return false;
+    } else {
+      emailError.textContent = "";
+      return true;
+    }
   }
 
   /**
@@ -59,7 +100,16 @@
    * @returns {boolean} - true if valid, false otherwise
    */
   function validatePassword() {
+    let passwordInput = id("password");
+    let passwordError = id("passwordError");
 
+    if (passwordInput.value.length < 8) {
+      passwordError.textContent = "Password must be at least 8 characters long";
+      return false;
+    } else {
+      passwordError.textContent = "";
+      return true;
+    }
   }
 
   /**
@@ -67,7 +117,17 @@
    * @returns {boolean} - true if valid, false otherwise
    */
   function validateConfirmPassword() {
- 
+    let passwordInput = id("password");
+    let confirmPasswordInput = id("confirmPassword");
+    let confirmPasswordError = id("confirmPasswordError");
+
+    if (confirmPasswordInput.value !== passwordInput.value) {
+      confirmPasswordError.textContent = "Passwords do not match";
+      return false;
+    } else {
+      confirmPasswordError.textContent = "";
+      return true;
+    }
   }
 
   /**

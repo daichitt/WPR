@@ -33,3 +33,9 @@ const deleteProduct = (id) => {
     }
 }
 exports.deleteProduct = deleteProduct;
+
+const findProductById = (id) => {
+    id = parseInt(id);
+    return products(product => product.id === id);
+}
+exports.findProductById = findProductById;

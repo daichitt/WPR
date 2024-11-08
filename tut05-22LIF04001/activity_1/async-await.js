@@ -3,12 +3,15 @@
 
     window.addEventListener("load", init);
 
-    function init() {
-        m3()
-            .then(m1)
-            .then(m2)
-            .then(console.log)
-            .catch(console.error);
+    async function init() {
+        try {
+            let result_m3 = await m3();
+            let result_m1 = await m1(result_m3);
+            let result_m2 = await m2(result_m1);
+            console.log(result_m2);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     function m1(value) {

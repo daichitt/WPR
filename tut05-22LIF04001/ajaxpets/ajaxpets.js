@@ -13,18 +13,44 @@
    */
   function init() {
     // TODO
+    // makeRequest();
+    let radioButtons = qsa("input[name='animal]");
+    console.log(radioButtons);
+    radioButtons.forEach(function (radioButton) {
+      radioButton.addEventListener("change",makeRequest);
+      // makeRequest();/
+    })
   }
 
   /**
    * TODO: Fetch data from the ajax pets API!
    */
-  function makeRequest() {
+  async function makeRequest() {
     // TODO
+    let url = "https://hanustartup.org/wpr/api/pets/index.php?animal=" + this.value;
+    fetch(url).then(statusCheck).then(response => response.text()).then(data => {
+      let pictureDiv = id("pictures");
+      let imagPaths = data.trim().split("\r\n");
+      pictureDiv.textContent = ""
+      imagPaths.forEach(function (imgSrc) {
+        let imgELement = document.createElement("img");
+      })
+
+    })
+    then();
+    // console.log(result.text());
+    // result.then(console);
   }
 
   /**
    * TODO: Implement any other functions you need
    */
+
+  function changeIgame(result) {
+    id("pictures");
+    console.log(result);
+    console.log("changeIgame");
+  }
 
   /* ------------------------------ Helper Functions  ------------------------------ */
 
